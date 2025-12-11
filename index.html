@@ -3,65 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Capstone Portfolio - Amos Kipkoech</title>
+    <title>Capstone Portfolio - Amos Kipkoech C025-01-0851/2022</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>Amos Kipkoech - C025-01-0851/2022</h1>
-        <h2>Capstone Portfolio</h2>
-        <nav>
-            <a href="#resumes">Resumes</a>
-            <a href="#autobiography">Autobiography</a>
-            <a href="#inventions">Invention/Innovation</a>
-            <a href="#culture">African Culture</a>
-            <a href="#society">Society Challenges</a>
-        </nav>
-    </header>
 
-    <main>
+<header>
+    <h1>Amos Kipkoech – C025-01-0851/2022</h1>
+    <h2>Capstone Project Portfolio</h2>
 
-        <!-- Resumes -->
-        <section id="resumes">
-            <h2>Resumes</h2>
-            <input type="file" id="resumeFiles" multiple>
-            <div id="resumePreview"></div>
-        </section>
+    <nav>
+        <a href="#resume">Resume</a>
+        <a href="#autobiography">Autobiography</a>
+        <a href="#invention">Invention / Innovation</a>
+        <a href="#culture">African Culture</a>
+        <a href="#society">Society Challenges</a>
+    </nav>
+</header>
 
-        <!-- Autobiography -->
-        <section id="autobiography">
-            <h2>Autobiography</h2>
-            <input type="file" id="autobiographyFiles" multiple>
-            <div id="autobiographyPreview"></div>
-        </section>
+<div class="container">
 
-        <!-- Invention/Innovation -->
-        <section id="inventions">
-            <h2>Invention / Innovation (Videos)</h2>
-            <input type="file" id="videoFiles" multiple>
-            <div id="videoPreview"></div>
-        </section>
+    <!-- Resume Section -->
+    <section id="resume">
+        <h3>Resume</h3>
+        <input type="file" accept=".pdf,.doc,.docx" onchange="uploadFile(event, 'resume')">
+        <div class="file-display" id="resumeDisplay"></div>
+    </section>
 
-        <!-- African Culture -->
-        <section id="culture">
-            <h2>African Culture</h2>
-            <input type="file" id="cultureFiles" multiple>
-            <div id="culturePreview"></div>
-        </section>
+    <!-- Autobiography Section -->
+    <section id="autobiography">
+        <h3>Autobiography</h3>
+        <input type="file" accept=".pdf,.doc,.docx,.txt" onchange="uploadFile(event, 'autobiography')">
+        <div class="file-display" id="autobiographyDisplay"></div>
+    </section>
 
-        <!-- Society Challenges -->
-        <section id="society">
-            <h2>Society Challenges</h2>
-            <input type="file" id="societyFiles" multiple>
-            <div id="societyPreview"></div>
-        </section>
+    <!-- Innovation Section -->
+    <section id="invention">
+        <h3>Invention / Innovation (Videos)</h3>
+        <input type="file" accept="video/*" onchange="uploadFile(event, 'invention')">
+        <div class="file-display" id="inventionDisplay"></div>
+    </section>
 
-    </main>
+    <!-- African Culture Section -->
+    <section id="culture">
+        <h3>African Culture</h3>
+        <input type="file" accept=".pdf,.doc,.docx,.txt" onchange="uploadFile(event, 'culture')">
+        <div class="file-display" id="cultureDisplay"></div>
+    </section>
 
-    <footer>
-        <p>&copy; 2025 Amos Kipkoech - Capstone Portfolio</p>
-    </footer>
+    <!-- Society Challenges Section -->
+    <section id="society">
+        <h3>Society Challenges</h3>
+        <input type="file" accept=".pdf,.doc,.docx,.txt" onchange="uploadFile(event, 'society')">
+        <div class="file-display" id="societyDisplay"></div>
+    </section>
 
-    <script src="script.js"></script>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
