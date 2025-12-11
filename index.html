@@ -23,49 +23,47 @@
 </header>
 
 <div class="container">
-
-    <!-- Resume Section -->
     <section id="resume">
         <h3>Resume</h3>
-        <input type="file" accept=".pdf,.doc,.docx" onchange="uploadFile(event, 'resume')">
-        <div class="file-display" id="resumeDisplay"></div>
+        <input type="text" placeholder="Paste Google Drive link here" id="resumeInput">
+        <button onclick="addLink('resume')">Add Link</button>
+        <div class="link-display" id="resumeDisplay"></div>
     </section>
 
-    <!-- Autobiography Section -->
     <section id="autobiography">
         <h3>Autobiography</h3>
-        <input type="file" accept=".pdf,.doc,.docx,.txt" onchange="uploadFile(event, 'autobiography')">
-        <div class="file-display" id="autobiographyDisplay"></div>
+        <input type="text" placeholder="Paste Google Drive link here" id="autobiographyInput">
+        <button onclick="addLink('autobiography')">Add Link</button>
+        <div class="link-display" id="autobiographyDisplay"></div>
     </section>
 
-    <!-- Innovation Section -->
     <section id="invention">
         <h3>Invention / Innovation (Videos)</h3>
-        <input type="file" accept="video/*" onchange="uploadFile(event, 'invention')">
-        <div class="file-display" id="inventionDisplay"></div>
+        <input type="text" placeholder="Paste Google Drive link here" id="inventionInput">
+        <button onclick="addLink('invention')">Add Link</button>
+        <div class="link-display" id="inventionDisplay"></div>
     </section>
 
-    <!-- African Culture Section -->
     <section id="culture">
         <h3>African Culture</h3>
-        <input type="file" accept=".pdf,.doc,.docx,.txt" onchange="uploadFile(event, 'culture')">
-        <div class="file-display" id="cultureDisplay"></div>
+        <input type="text" placeholder="Paste Google Drive link here" id="cultureInput">
+        <button onclick="addLink('culture')">Add Link</button>
+        <div class="link-display" id="cultureDisplay"></div>
     </section>
 
-    <!-- Society Challenges Section -->
     <section id="society">
         <h3>Society Challenges</h3>
-        <input type="file" accept=".pdf,.doc,.docx,.txt" onchange="uploadFile(event, 'society')">
-        <div class="file-display" id="societyDisplay"></div>
+        <input type="text" placeholder="Paste Google Drive link here" id="societyInput">
+        <button onclick="addLink('society')">Add Link</button>
+        <div class="link-display" id="societyDisplay"></div>
     </section>
 
-    <!-- NEW OTHERS SECTION -->
     <section id="others">
         <h3>Others</h3>
-        <input type="file" accept=".pdf,.doc,.docx,.txt,video/*" onchange="uploadFile(event, 'others')">
-        <div class="file-display" id="othersDisplay"></div>
+        <input type="text" placeholder="Paste Google Drive link here" id="othersInput">
+        <button onclick="addLink('others')">Add Link</button>
+        <div class="link-display" id="othersDisplay"></div>
     </section>
-
 </div>
 
 <script src="script.js"></script>
