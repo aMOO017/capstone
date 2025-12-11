@@ -1,51 +1,66 @@
-function previewFiles(inputElement, previewContainer, type) {
-    previewContainer.innerHTML = '';
-    const files = inputElement.files;
+function previewFiles(input, outputBox) {
+    outputBox.innerHTML = "";
+    const files = input.files;
 
     for (let file of files) {
-        const div = document.createElement('div');
-        div.classList.add('file-item');
+        const div = document.createElement("div");
+        div.classList.add("file-item");
 
-        // For videos
-        if (file.type.includes('video')) {
-            const url = URL.createObjectURL(file);
-            div.innerHTML = `<p>${file.name}</p><video controls src="${url}"></video>`;
+        // Create file URL
+        const url = URL.createObjectURL(file);
+
+        // Videos
+        if (file.type.startsWith("video/")) {
+            div.innerHTML = `<p>${file.name}</p>
+                             <video controls src="${url}"></video>`;
         }
-        // For images
-        else if (file.type.includes('image')) {
-            const url = URL.createObjectURL(file);
-            div.innerHTML = `<p>${file.name}</p><img src="${url}" alt="${file.name}">`;
+
+        // Images
+        else if (file.type.startsWith("image/")) {
+            div.innerHTML = `<p>${file.name}</p>
+                             <img src="${url}">`;
         }
-        // For documents
+
+        // PDF View
+        else if (file.type === "application/pdf") {
+            div.innerHTML = `<p>${file.name}</p>
+                             <iframe src="${url}" height="500px"></iframe>`;
+        }
+
+        // Text files
+        else if (file.type.startsWith("text/")) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                div.innerHTML = `<p>${file.name}</p>
+                                 <textarea style="width:100%;height:200px;">${e.target.result}</textarea>`;
+            };
+            reader.readAsText(file);
+        }
+
+        // Word or PowerPoint → DOWNLOAD ONLY
         else {
-            div.innerHTML = `<p>${file.name}</p>`;
+            div.innerHTML = `<p>${file.name}</p>
+                             <a class="download-btn" href="${url}" download="${file.name}">
+                                Download File
+                             </a>`;
         }
 
-        previewContainer.appendChild(div);
+        outputBox.appendChild(div);
     }
 }
 
-// Resumes
-const resumeFiles = document.getElementById('resumeFiles');
-const resumePreview = document.getElementById('resumePreview');
-resumeFiles.addEventListener('change', () => previewFiles(resumeFiles, resumePreview));
+// Connect input to preview
+document.getElementById("resumeFiles").addEventListener("change",
+    () => previewFiles(resumeFiles, resumePreview));
 
-// Autobiography
-const autobiographyFiles = document.getElementById('autobiographyFiles');
-const autobiographyPreview = document.getElementById('autobiographyPreview');
-autobiographyFiles.addEventListener('change', () => previewFiles(autobiographyFiles, autobiographyPreview));
+document.getElementById("autobiographyFiles").addEventListener("change",
+    () => previewFiles(autobiographyFiles, autobiographyPreview));
 
-// Videos
-const videoFiles = document.getElementById('videoFiles');
-const videoPreview = document.getElementById('videoPreview');
-videoFiles.addEventListener('change', () => previewFiles(videoFiles, videoPreview));
+document.getElementById("videoFiles").addEventListener("change",
+    () => previewFiles(videoFiles, videoPreview));
 
-// African Culture
-const cultureFiles = document.getElementById('cultureFiles');
-const culturePreview = document.getElementById('culturePreview');
-cultureFiles.addEventListener('change', () => previewFiles(cultureFiles, culturePreview));
+document.getElementById("cultureFiles").addEventListener("change",
+    () => previewFiles(cultureFiles, culturePreview));
 
-// Society Challenges
-const societyFiles = document.getElementById('societyFiles');
-const societyPreview = document.getElementById('societyPreview');
-societyFiles.addEventListener('change', () => previewFiles(societyFiles, societyPreview));
+document.getElementById("societyFiles").addEventListener("change",
+    () => previewFiles(societyFiles, societyPreview));
