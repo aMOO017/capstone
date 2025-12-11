@@ -1,11 +1,10 @@
-// Sections we have
 const sections = ["resume", "autobiography", "invention", "culture", "society", "others"];
 
-// Load saved links from localStorage on page load
+// Load saved links on page load
 window.onload = function() {
     sections.forEach(section => {
         const saved = JSON.parse(localStorage.getItem(section)) || [];
-        saved.forEach(link => displayLink(section, link));
+        saved.forEach(link => displayFile(section, link));
     });
 };
 
@@ -14,46 +13,63 @@ function addLink(section) {
     const input = document.getElementById(section + "Input");
     let url = input.value.trim();
     if (!url) return alert("Please paste a valid Google Drive link.");
-    
-    // Save link in localStorage
+
     let saved = JSON.parse(localStorage.getItem(section)) || [];
     saved.push(url);
     localStorage.setItem(section, JSON.stringify(saved));
 
-    // Display on page
-    displayLink(section, url);
-
-    // Clear input
+    displayFile(section, url);
     input.value = "";
 }
 
-// Display a single link
-function displayLink(section, url) {
+// Convert Google Drive sharing link to embeddable link
+function convertToEmbedURL(url) {
+    const fileIdMatch = url.match(/[-\w]{25,}/);
+    if (!fileIdMatch) return null;
+    const fileId = fileIdMatch[0];
+
+    if (url.includes("video") || url.includes(".mp4")) {
+        return `https://drive.google.com/file/d/${fileId}/preview`;
+    } else if (url.includes(".pdf") || url.includes("pdf")) {
+        return `https://drive.google.com/file/d/${fileId}/preview`;
+    } else if (url.includes(".doc") || url.includes(".docx") || url.includes("document")) {
+        return `https://docs.google.com/document/d/${fileId}/preview`;
+    } else if (url.includes(".ppt") || url.includes(".pptx")) {
+        return `https://docs.google.com/presentation/d/${fileId}/embed?start=false&loop=false&delayms=3000`;
+    } else if (url.includes(".jpg") || url.includes(".jpeg") || url.includes(".png") || url.includes(".gif")) {
+        return `https://drive.google.com/uc?export=view&id=${fileId}`;
+    } else {
+        // default to file preview
+        return `https://drive.google.com/file/d/${fileId}/preview`;
+    }
+}
+
+// Display the file inside the section
+function displayFile(section, url) {
     const container = document.getElementById(section + "Display");
 
-    // Create wrapper div
     const div = document.createElement("div");
     div.className = "file-item";
 
-    // Extract Google Drive file ID if possible for embed
-    const match = url.match(/[-\w]{25,}/);
-    const fileId = match ? match[0] : null;
+    const embedURL = convertToEmbedURL(url);
 
-    let embedHTML = "";
-
-    // Attempt to embed video, PDF, or image based on Google Drive preview link
-    if (fileId) {
-        if (url.includes("/view?usp=sharing") || url.includes("/edit")) {
-            // convert to direct link
-            const directURL = `https://drive.google.com/uc?export=download&id=${fileId}`;
-            embedHTML = `<a href="${directURL}" target="_blank">Open / Download File</a>`;
-        } else {
-            embedHTML = `<a href="${url}" target="_blank">Open / Download File</a>`;
-        }
+    if (!embedURL) {
+        div.innerHTML = "<p>Cannot embed this file. Check the link.</p>";
     } else {
-        embedHTML = `<a href="${url}" target="_blank">Open / Download File</a>`;
+        if (url.match(/\.(pdf)$/i) || url.includes("/file/d/")) {
+            // Embed PDFs and videos
+            div.innerHTML = `<iframe src="${embedURL}" width="100%" height="400px" frameborder="0" allowfullscreen></iframe>`;
+        } else if (url.match(/\.(doc|docx)$/i)) {
+            div.innerHTML = `<iframe src="${embedURL}" width="100%" height="400px" frameborder="0"></iframe>`;
+        } else if (url.match(/\.(ppt|pptx)$/i)) {
+            div.innerHTML = `<iframe src="${embedURL}" width="100%" height="400px" frameborder="0" allowfullscreen></iframe>`;
+        } else if (url.match(/\.(jpg|jpeg|png|gif)$/i)) {
+            div.innerHTML = `<img src="${embedURL}" alt="Image" style="width:100%;border-radius:5px;">`;
+        } else {
+            // default iframe preview
+            div.innerHTML = `<iframe src="${embedURL}" width="100%" height="400px" frameborder="0"></iframe>`;
+        }
     }
 
-    div.innerHTML = embedHTML;
     container.appendChild(div);
 }
