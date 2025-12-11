@@ -1,66 +1,75 @@
-function previewFiles(input, outputBox) {
-    outputBox.innerHTML = "";
-    const files = input.files;
+// Load saved files from localStorage on startup
+window.onload = function() {
+    ["resume", "autobiography", "culture", "society"].forEach(section => {
+        let saved = localStorage.getItem(section);
+        if (saved) {
+            displaySavedFile(section, JSON.parse(saved));
+        }
+    });
+};
 
-    for (let file of files) {
-        const div = document.createElement("div");
-        div.classList.add("file-item");
+function uploadFile(event, section) {
+    const file = event.target.files[0];
+    const reader = new FileReader();
 
-        // Create file URL
-        const url = URL.createObjectURL(file);
+    reader.onload = function(e) {
+        const base64 = e.target.result;
 
-        // Videos
-        if (file.type.startsWith("video/")) {
-            div.innerHTML = `<p>${file.name}</p>
-                             <video controls src="${url}"></video>`;
+        // Store only non-video files in localStorage
+        if (!file.type.startsWith("video")) {
+            localStorage.setItem(section, JSON.stringify({
+                name: file.name,
+                type: file.type,
+                content: base64
+            }));
         }
 
-        // Images
-        else if (file.type.startsWith("image/")) {
-            div.innerHTML = `<p>${file.name}</p>
-                             <img src="${url}">`;
-        }
+        displayFile(section, file.name, file.type, base64);
+    };
 
-        // PDF View
-        else if (file.type === "application/pdf") {
-            div.innerHTML = `<p>${file.name}</p>
-                             <iframe src="${url}" height="500px"></iframe>`;
-        }
-
-        // Text files
-        else if (file.type.startsWith("text/")) {
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                div.innerHTML = `<p>${file.name}</p>
-                                 <textarea style="width:100%;height:200px;">${e.target.result}</textarea>`;
-            };
-            reader.readAsText(file);
-        }
-
-        // Word or PowerPoint → DOWNLOAD ONLY
-        else {
-            div.innerHTML = `<p>${file.name}</p>
-                             <a class="download-btn" href="${url}" download="${file.name}">
-                                Download File
-                             </a>`;
-        }
-
-        outputBox.appendChild(div);
-    }
+    reader.readAsDataURL(file);
 }
 
-// Connect input to preview
-document.getElementById("resumeFiles").addEventListener("change",
-    () => previewFiles(resumeFiles, resumePreview));
+function displaySavedFile(section, savedFile) {
+    displayFile(section, savedFile.name, savedFile.type, savedFile.content);
+}
 
-document.getElementById("autobiographyFiles").addEventListener("change",
-    () => previewFiles(autobiographyFiles, autobiographyPreview));
+function displayFile(section, name, type, content) {
+    const display = document.getElementById(section + "Display");
+    display.innerHTML = ""; // Clear old preview
 
-document.getElementById("videoFiles").addEventListener("change",
-    () => previewFiles(videoFiles, videoPreview));
+    let div = document.createElement("div");
+    div.classList.add("file-item");
 
-document.getElementById("cultureFiles").addEventListener("change",
-    () => previewFiles(cultureFiles, culturePreview));
+    // Text or PDF preview
+    if (type.includes("pdf")) {
+        div.innerHTML = `
+            <p>${name}</p>
+            <embed src="${content}" width="100%" height="400px"></embed>
+            <br><a href="${content}" download="${name}">Download</a>
+        `;
+    }
+    else if (type.includes("text")) {
+        div.innerHTML = `
+            <p>${name}</p>
+            <textarea style="width:100%;height:200px;">${atob(content.split(",")[1])}</textarea>
+            <br><a href="${content}" download="${name}">Download</a>
+        `;
+    }
+    else if (type.startsWith("video")) {
+        div.innerHTML = `
+            <p>${name}</p>
+            <video controls src="${content}"></video>
+            <br><a href="${content}" download="${name}">Download</a>
+            <p style="color:red;">(Video will not be saved permanently – browser storage limit)</p>
+        `;
+    }
+    else {
+        div.innerHTML = `
+            <p>${name}</p>
+            <a href="${content}" download="${name}">Download File</a>
+        `;
+    }
 
-document.getElementById("societyFiles").addEventListener("change",
-    () => previewFiles(societyFiles, societyPreview));
+    display.appendChild(div);
+}
