@@ -51,33 +51,19 @@ h2 {
     color: #007BFF;
 }
 
-textarea {
-    width: 100%;
-    height: 100px;
+input[type="file"] {
     margin: 10px 0;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
 }
 
-button {
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
-#resumePreview, #videoPreview, #bioPreview, #culturePreview, #societyPreview {
+#resumePreview, #autobiographyPreview, #videoPreview, #culturePreview, #societyPreview {
     margin-top: 10px;
 }
 
-.file-item video {
+.file-item {
+    margin-bottom: 15px;
+}
+
+.file-item video, .file-item img {
     max-width: 100%;
     height: auto;
     margin-top: 5px;
