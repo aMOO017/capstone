@@ -1,54 +1,51 @@
-// Resumes Preview
+function previewFiles(inputElement, previewContainer, type) {
+    previewContainer.innerHTML = '';
+    const files = inputElement.files;
+
+    for (let file of files) {
+        const div = document.createElement('div');
+        div.classList.add('file-item');
+
+        // For videos
+        if (file.type.includes('video')) {
+            const url = URL.createObjectURL(file);
+            div.innerHTML = `<p>${file.name}</p><video controls src="${url}"></video>`;
+        }
+        // For images
+        else if (file.type.includes('image')) {
+            const url = URL.createObjectURL(file);
+            div.innerHTML = `<p>${file.name}</p><img src="${url}" alt="${file.name}">`;
+        }
+        // For documents
+        else {
+            div.innerHTML = `<p>${file.name}</p>`;
+        }
+
+        previewContainer.appendChild(div);
+    }
+}
+
+// Resumes
 const resumeFiles = document.getElementById('resumeFiles');
 const resumePreview = document.getElementById('resumePreview');
-
-resumeFiles.addEventListener('change', () => {
-    resumePreview.innerHTML = '';
-    const files = resumeFiles.files;
-    for (let file of files) {
-        const div = document.createElement('div');
-        div.classList.add('file-item');
-        div.innerHTML = `<p>${file.name}</p>`;
-        resumePreview.appendChild(div);
-    }
-});
+resumeFiles.addEventListener('change', () => previewFiles(resumeFiles, resumePreview));
 
 // Autobiography
-const saveBioBtn = document.getElementById('saveBio');
-const bioPreview = document.getElementById('bioPreview');
-saveBioBtn.addEventListener('click', () => {
-    const text = document.getElementById('autobiographyText').value;
-    bioPreview.innerHTML = `<p>${text}</p>`;
-});
+const autobiographyFiles = document.getElementById('autobiographyFiles');
+const autobiographyPreview = document.getElementById('autobiographyPreview');
+autobiographyFiles.addEventListener('change', () => previewFiles(autobiographyFiles, autobiographyPreview));
 
-// Inventions / Videos
+// Videos
 const videoFiles = document.getElementById('videoFiles');
 const videoPreview = document.getElementById('videoPreview');
-
-videoFiles.addEventListener('change', () => {
-    videoPreview.innerHTML = '';
-    const files = videoFiles.files;
-    for (let file of files) {
-        const div = document.createElement('div');
-        div.classList.add('file-item');
-        const url = URL.createObjectURL(file);
-        div.innerHTML = `<p>${file.name}</p><video controls src="${url}"></video>`;
-        videoPreview.appendChild(div);
-    }
-});
+videoFiles.addEventListener('change', () => previewFiles(videoFiles, videoPreview));
 
 // African Culture
-const saveCultureBtn = document.getElementById('saveCulture');
+const cultureFiles = document.getElementById('cultureFiles');
 const culturePreview = document.getElementById('culturePreview');
-saveCultureBtn.addEventListener('click', () => {
-    const text = document.getElementById('cultureText').value;
-    culturePreview.innerHTML = `<p>${text}</p>`;
-});
+cultureFiles.addEventListener('change', () => previewFiles(cultureFiles, culturePreview));
 
 // Society Challenges
-const saveSocietyBtn = document.getElementById('saveSociety');
+const societyFiles = document.getElementById('societyFiles');
 const societyPreview = document.getElementById('societyPreview');
-saveSocietyBtn.addEventListener('click', () => {
-    const text = document.getElementById('societyText').value;
-    societyPreview.innerHTML = `<p>${text}</p>`;
-});
+societyFiles.addEventListener('change', () => previewFiles(societyFiles, societyPreview));
