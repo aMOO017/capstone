@@ -3,19 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Capstone Project Upload & Preview</title>
+    <title>Capstone Portfolio - Amos Kipkoech</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Capstone Project Submission</h1>
-        <p>Upload your PowerPoint, Word, or Video files below to preview them.</p>
-        
-        <input type="file" id="projectFiles" multiple accept=".ppt,.pptx,.doc,.docx,.mp4,.mov,.avi">
-        <div id="filePreview"></div>
-    </div>
+    <header>
+        <h1>Amos Kipkoech - C025-01-0851/2022</h1>
+        <h2>My Capstone Portfolio</h2>
+        <nav>
+            <a href="#resumes">Resumes</a>
+            <a href="#autobiography">Autobiography</a>
+            <a href="#inventions">Invention/Innovation</a>
+            <a href="#culture">African Culture</a>
+            <a href="#society">Society Challenges</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Resumes Section -->
+        <section id="resumes">
+            <h2>Resumes</h2>
+            <p>Upload or view your resumes here.</p>
+            <input type="file" id="resumeFiles" multiple accept=".doc,.docx,.pdf">
+            <div id="resumePreview"></div>
+        </section>
+
+        <!-- Autobiography Section -->
+        <section id="autobiography">
+            <h2>Autobiography</h2>
+            <textarea id="autobiographyText" placeholder="Write or paste your autobiography here..."></textarea>
+            <button id="saveBio">Save Autobiography</button>
+            <div id="bioPreview"></div>
+        </section>
+
+        <!-- Invention/Innovation Section -->
+        <section id="inventions">
+            <h2>Invention / Innovation (Videos)</h2>
+            <input type="file" id="videoFiles" multiple accept="video/*">
+            <div id="videoPreview"></div>
+        </section>
+
+        <!-- African Culture Section -->
+        <section id="culture">
+            <h2>African Culture</h2>
+            <textarea id="cultureText" placeholder="Share about African culture..."></textarea>
+            <button id="saveCulture">Save</button>
+            <div id="culturePreview"></div>
+        </section>
+
+        <!-- Society Challenges Section -->
+        <section id="society">
+            <h2>Society Challenges</h2>
+            <textarea id="societyText" placeholder="Describe society challenges..."></textarea>
+            <button id="saveSociety">Save</button>
+            <div id="societyPreview"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Amos Kipkoech - Capstone Portfolio</p>
+    </footer>
 
     <script src="script.js"></script>
 </body>
 </html>
-
