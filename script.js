@@ -22,13 +22,13 @@ function addLink(section) {
     input.value = "";
 }
 
-// Convert Google Drive sharing link to embeddable link
+// Convert Google Drive sharing link to embeddable URL
 function convertToEmbedURL(url) {
     const fileIdMatch = url.match(/[-\w]{25,}/);
     if (!fileIdMatch) return null;
     const fileId = fileIdMatch[0];
 
-    if (url.includes("video") || url.includes(".mp4")) {
+    if (url.includes("video") || url.includes(".mp4") || url.includes("/file/d/")) {
         return `https://drive.google.com/file/d/${fileId}/preview`;
     } else if (url.includes(".pdf") || url.includes("pdf")) {
         return `https://drive.google.com/file/d/${fileId}/preview`;
@@ -39,7 +39,6 @@ function convertToEmbedURL(url) {
     } else if (url.includes(".jpg") || url.includes(".jpeg") || url.includes(".png") || url.includes(".gif")) {
         return `https://drive.google.com/uc?export=view&id=${fileId}`;
     } else {
-        // default to file preview
         return `https://drive.google.com/file/d/${fileId}/preview`;
     }
 }
@@ -53,23 +52,55 @@ function displayFile(section, url) {
 
     const embedURL = convertToEmbedURL(url);
 
+    let contentHTML = "";
+
     if (!embedURL) {
-        div.innerHTML = "<p>Cannot embed this file. Check the link.</p>";
+        contentHTML = "<p>Cannot embed this file. Check the link.</p>";
     } else {
         if (url.match(/\.(pdf)$/i) || url.includes("/file/d/")) {
-            // Embed PDFs and videos
-            div.innerHTML = `<iframe src="${embedURL}" width="100%" height="400px" frameborder="0" allowfullscreen></iframe>`;
+            contentHTML = `<iframe src="${embedURL}" width="100%" height="400px" frameborder="0" allowfullscreen></iframe>`;
         } else if (url.match(/\.(doc|docx)$/i)) {
-            div.innerHTML = `<iframe src="${embedURL}" width="100%" height="400px" frameborder="0"></iframe>`;
+            contentHTML = `<iframe src="${embedURL}" width="100%" height="400px" frameborder="0"></iframe>`;
         } else if (url.match(/\.(ppt|pptx)$/i)) {
-            div.innerHTML = `<iframe src="${embedURL}" width="100%" height="400px" frameborder="0" allowfullscreen></iframe>`;
+            contentHTML = `<iframe src="${embedURL}" width="100%" height="400px" frameborder="0" allowfullscreen></iframe>`;
         } else if (url.match(/\.(jpg|jpeg|png|gif)$/i)) {
-            div.innerHTML = `<img src="${embedURL}" alt="Image" style="width:100%;border-radius:5px;">`;
+            contentHTML = `<img src="${embedURL}" alt="Image" style="width:100%;border-radius:5px;">`;
         } else {
-            // default iframe preview
-            div.innerHTML = `<iframe src="${embedURL}" width="100%" height="400px" frameborder="0"></iframe>`;
+            contentHTML = `<iframe src="${embedURL}" width="100%" height="400px" frameborder="0"></iframe>`;
         }
     }
 
+    // Download button (Google Drive direct download)
+    const fileIdMatch = url.match(/[-\w]{25,}/);
+    let downloadURL = fileIdMatch ? `https://drive.google.com/uc?export=download&id=${fileIdMatch[0]}` : url;
+    const downloadButton = `<a href="${downloadURL}" target="_blank" class="download-btn">Download</a>`;
+
+    // Delete button
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "Delete";
+    deleteButton.style.background = "#d9534f";
+    deleteButton.style.color = "#fff";
+    deleteButton.style.border = "none";
+    deleteButton.style.padding = "6px 10px";
+    deleteButton.style.borderRadius = "5px";
+    deleteButton.style.marginLeft = "5px";
+    deleteButton.onclick = function() {
+        deleteFile(section, url, div);
+    };
+
+    div.innerHTML = contentHTML + "<div style='margin-top:8px;'>" + downloadButton + "</div>";
+    div.appendChild(deleteButton);
+
     container.appendChild(div);
+}
+
+// Delete file from localStorage and remove from display
+function deleteFile(section, url, divElement) {
+    if (!confirm("Are you sure you want to delete this file from the section?")) return;
+
+    let saved = JSON.parse(localStorage.getItem(section)) || [];
+    saved = saved.filter(link => link !== url);
+    localStorage.setItem(section, JSON.stringify(saved));
+
+    divElement.remove();
 }
