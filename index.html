@@ -3,22 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Capstone Project Upload</title>
+    <title>Capstone Project Upload & Preview</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
         <h1>Capstone Project Submission</h1>
-        <p>Upload your PowerPoint, Word, or Video files below.</p>
+        <p>Upload your PowerPoint, Word, or Video files below to preview them.</p>
         
-        <form id="uploadForm">
-            <label for="projectFiles">Select files:</label>
-            <input type="file" id="projectFiles" multiple accept=".ppt,.pptx,.doc,.docx,.mp4,.mov,.avi">
-            <div id="fileList"></div>
-            <button type="submit">Upload</button>
-        </form>
+        <input type="file" id="projectFiles" multiple accept=".ppt,.pptx,.doc,.docx,.mp4,.mov,.avi">
+        <div id="filePreview"></div>
     </div>
 
     <script src="script.js"></script>
 </body>
 </html>
+
