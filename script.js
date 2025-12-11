@@ -1,75 +1,116 @@
-// Load saved files from localStorage on startup
-window.onload = function() {
-    ["resume", "autobiography", "culture", "society"].forEach(section => {
-        let saved = localStorage.getItem(section);
+// -------------------------------------------
+// UTILITY: Display file in its preview area
+// -------------------------------------------
+function displayFile(sectionId, fileName, fileType, fileDataURL, isBlobURL = false) {
+    const container = document.getElementById(sectionId + "Display");
+    container.innerHTML = ""; // Clear previous preview
+
+    const wrapper = document.createElement("div");
+    wrapper.classList.add("file-item");
+
+    // Video preview
+    if (fileType.startsWith("video/")) {
+        wrapper.innerHTML = `
+            <p>${fileName}</p>
+            <video controls src="${fileDataURL}"></video>
+            <a class="download-btn" href="${fileDataURL}" download="${fileName}">Download Video</a>
+            <p style="color:red;font-size:0.9em;">(Video cannot be saved permanently)</p>
+        `;
+    }
+
+    // PDF preview
+    else if (fileType === "application/pdf") {
+        wrapper.innerHTML = `
+            <p>${fileName}</p>
+            <embed src="${fileDataURL}" type="application/pdf" width="100%" height="500px">
+            <a class="download-btn" href="${fileDataURL}" download="${fileName}">Download PDF</a>
+        `;
+    }
+
+    // Image preview
+    else if (fileType.startsWith("image/")) {
+        wrapper.innerHTML = `
+            <p>${fileName}</p>
+            <img src="${fileDataURL}" style="width:100%;border-radius:5px;">
+            <a class="download-btn" href="${fileDataURL}" download="${fileName}">Download Image</a>
+        `;
+    }
+
+    // Text preview
+    else if (fileType.startsWith("text/")) {
+        const textContent = atob(fileDataURL.split(",")[1]); 
+        wrapper.innerHTML = `
+            <p>${fileName}</p>
+            <textarea readonly style="width:100%;height:200px;">${textContent}</textarea>
+            <a class="download-btn" href="${fileDataURL}" download="${fileName}">Download Text File</a>
+        `;
+    }
+
+    // Other document types (Word, PPT, etc.)
+    else {
+        wrapper.innerHTML = `
+            <p>${fileName}</p>
+            <a class="download-btn" href="${fileDataURL}" download="${fileName}">Download File</a>
+            <p>(Preview not available for this file type)</p>
+        `;
+    }
+
+    container.appendChild(wrapper);
+}
+
+// -------------------------------------------
+// LOAD SAVED NON-VIDEO FILES ON PAGE OPEN
+// -------------------------------------------
+window.onload = function () {
+    const sections = ["resume", "autobiography", "invention", "culture", "society", "others"];
+
+    sections.forEach(section => {
+        const saved = localStorage.getItem(section);
         if (saved) {
-            displaySavedFile(section, JSON.parse(saved));
+            const obj = JSON.parse(saved);
+            displayFile(section, obj.name, obj.type, obj.content, false);
         }
     });
 };
 
-function uploadFile(event, section) {
+// -------------------------------------------
+// UPLOAD HANDLER
+// -------------------------------------------
+window.uploadFile = function (event, section) {
     const file = event.target.files[0];
+    if (!file) return;
+
+    const fileType = file.type;
+    const fileName = file.name;
+
+    // Videos – preview only (NOT saved)
+    if (fileType.startsWith("video/")) {
+        const blobURL = URL.createObjectURL(file);
+        displayFile(section, fileName, fileType, blobURL, true);
+        return;
+    }
+
+    // All other files – convert to base64
     const reader = new FileReader();
 
-    reader.onload = function(e) {
-        const base64 = e.target.result;
+    reader.onload = function (e) {
+        const dataURL = e.target.result;
 
-        // Store only non-video files in localStorage
-        if (!file.type.startsWith("video")) {
-            localStorage.setItem(section, JSON.stringify({
-                name: file.name,
-                type: file.type,
-                content: base64
-            }));
+        // Save file metadata + content
+        const fileObj = {
+            name: fileName,
+            type: fileType,
+            content: dataURL
+        };
+
+        try {
+            localStorage.setItem(section, JSON.stringify(fileObj));
+        } catch (e) {
+            console.warn("Storage limit reached or error saving:", e);
         }
 
-        displayFile(section, file.name, file.type, base64);
+        displayFile(section, fileName, fileType, dataURL, false);
     };
 
     reader.readAsDataURL(file);
-}
-
-function displaySavedFile(section, savedFile) {
-    displayFile(section, savedFile.name, savedFile.type, savedFile.content);
-}
-
-function displayFile(section, name, type, content) {
-    const display = document.getElementById(section + "Display");
-    display.innerHTML = ""; // Clear old preview
-
-    let div = document.createElement("div");
-    div.classList.add("file-item");
-
-    // Text or PDF preview
-    if (type.includes("pdf")) {
-        div.innerHTML = `
-            <p>${name}</p>
-            <embed src="${content}" width="100%" height="400px"></embed>
-            <br><a href="${content}" download="${name}">Download</a>
-        `;
-    }
-    else if (type.includes("text")) {
-        div.innerHTML = `
-            <p>${name}</p>
-            <textarea style="width:100%;height:200px;">${atob(content.split(",")[1])}</textarea>
-            <br><a href="${content}" download="${name}">Download</a>
-        `;
-    }
-    else if (type.startsWith("video")) {
-        div.innerHTML = `
-            <p>${name}</p>
-            <video controls src="${content}"></video>
-            <br><a href="${content}" download="${name}">Download</a>
-            <p style="color:red;">(Video will not be saved permanently – browser storage limit)</p>
-        `;
-    }
-    else {
-        div.innerHTML = `
-            <p>${name}</p>
-            <a href="${content}" download="${name}">Download File</a>
-        `;
-    }
-
-    display.appendChild(div);
-}
+};
