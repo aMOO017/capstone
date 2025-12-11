@@ -2,69 +2,47 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     background: #f4f4f9;
-    color: #333;
 }
 
 header {
-    background-color: #007BFF;
+    background: #007BFF;
     color: #fff;
     padding: 20px;
     text-align: center;
 }
 
-header h1 {
-    font-size: 24px;
-    margin: 0;
-}
-
-header h2 {
-    font-size: 18px;
-    margin: 5px 0 15px;
-}
-
-header nav a {
+nav a {
     color: #fff;
-    margin: 0 15px;
+    margin: 0 10px;
     text-decoration: none;
     font-weight: bold;
-}
-
-header nav a:hover {
-    text-decoration: underline;
-}
-
-main {
-    padding: 20px;
-    max-width: 800px;
-    margin: auto;
 }
 
 section {
     background: #fff;
     padding: 20px;
-    margin-bottom: 20px;
+    margin: 20px auto;
+    width: 80%;
     border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
-}
-
-h2 {
-    color: #007BFF;
-}
-
-input[type="file"] {
-    margin: 10px 0;
-}
-
-#resumePreview, #autobiographyPreview, #videoPreview, #culturePreview, #societyPreview {
-    margin-top: 10px;
+    box-shadow: 0 0 10px #aaa;
 }
 
 .file-item {
-    margin-bottom: 15px;
+    margin: 10px 0;
 }
 
-.file-item video, .file-item img {
-    max-width: 100%;
-    height: auto;
-    margin-top: 5px;
+iframe, img, video {
+    width: 100%;
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
+.download-btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px;
+    background: #28a745;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
 }
