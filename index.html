@@ -59,15 +59,17 @@
         <div class="file-display" id="societyDisplay"></div>
     </section>
 
-    <!-- NEW OTHERS SECTION -->
+    <!-- Others Section -->
     <section id="others">
         <h3>Others</h3>
-        <input type="file" accept=".pdf,.doc,.docx,.txt,video/*" onchange="uploadFile(event, 'others')">
+        <input type="file" accept=".pdf,.doc,.docx,.txt,video/*,image/*" onchange="uploadFile(event, 'others')">
         <div class="file-display" id="othersDisplay"></div>
     </section>
 
 </div>
 
-<script src="script.js"></script>
+<!-- IMPORTANT: script must be a module for Firebase -->
+<script type="module" src="script.js"></script>
+
 </body>
 </html>
