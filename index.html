@@ -4,7 +4,122 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Capstone Portfolio - Amos Kipkoech C025-01-0851/2022</title>
-<link rel="stylesheet" href="styles.css">
+
+<style>
+
+/* --- GLOBAL PAGE STYLING --- */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f2f2f7;
+}
+
+/* --- HEADER --- */
+header {
+    background: #1a1a1a;
+    color: white;
+    padding: 25px;
+    text-align: center;
+    border-bottom: 5px solid #ffcc00;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 32px;
+}
+
+header h2 {
+    margin-top: 8px;
+    font-weight: normal;
+}
+
+/* --- NAVIGATION --- */
+nav {
+    margin-top: 15px;
+}
+
+nav a {
+    color: #ffcc00;
+    margin: 0 12px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+nav a:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+/* --- MAIN CONTENT WRAPPER --- */
+.container {
+    width: 85%;
+    margin: auto;
+    padding: 25px 0;
+}
+
+/* --- SECTION CARDS --- */
+section {
+    background: white;
+    padding: 20px;
+    margin-bottom: 25px;
+    border-radius: 12px;
+    box-shadow: 0px 3px 12px rgba(0,0,0,0.15);
+    border-left: 8px solid #ffcc00;
+}
+
+section h3 {
+    margin-top: 0;
+    font-size: 22px;
+    color: #333;
+}
+
+/* --- FILE CARDS --- */
+.file-card {
+    background: #fafafa;
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    display: block;
+    box-shadow: 0px 2px 6px rgba(0,0,0,0.08);
+}
+
+.file-card p {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* --- BUTTON STYLING --- */
+.view-btn, .download-btn {
+    padding: 8px 14px;
+    margin-right: 8px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.view-btn {
+    background: #0077ff;
+    color: white;
+}
+
+.view-btn:hover {
+    background: #005fcc;
+}
+
+.download-btn {
+    background: #28a745;
+    color: white;
+}
+
+.download-btn:hover {
+    background: #1e7e34;
+}
+
+</style>
 </head>
 <body>
 
@@ -26,96 +141,81 @@
 <!-- Resume Section -->
 <section id="resume">
 <h3>Resume</h3>
-<div class="file-item">
-    <div class="file-card">
-        <p>Resume Document 1</p>
-        <a class="view-btn" href="https://drive.google.com/file/d/1PRNPmuEgc6IvhUgI36dgwbqdAz_XrFGh/preview" target="_blank">VIEW FILE</a>
-        <a class="download-btn" href="https://drive.google.com/uc?export=download&id=1PRNPmuEgc6IvhUgI36dgwbqdAz_XrFGh">DOWNLOAD</a>
-    </div>
-    <div class="file-card">
-        <p>Resume Document 2</p>
-        <a class="view-btn" href="https://drive.google.com/file/d/16lH7Ok-PxuWyqrsKLqCqzIowLgGjPddd/preview" target="_blank">VIEW FILE</a>
-        <a class="download-btn" href="https://drive.google.com/uc?export=download&id=16lH7Ok-PxuWyqrsKLqCqzIowLgGjPddd">DOWNLOAD</a>
-    </div>
-    <div class="file-card">
-        <p>Resume Document 3</p>
-        <a class="view-btn" href="https://drive.google.com/file/d/1yy1keW8VyQRw7AlZIr-g_lHQdEUBvPM-/preview" target="_blank">VIEW FILE</a>
-        <a class="download-btn" href="https://drive.google.com/uc?export=download&id=1yy1keW8VyQRw7AlZIr-g_lHQdEUBvPM-">DOWNLOAD</a>
-    </div>
+<div class="file-card">
+    <p>Resume Document 1</p>
+    <a class="view-btn" href="https://drive.google.com/file/d/1PRNPmuEgc6IvhUgI36dgwbqdAz_XrFGh/preview" target="_blank">VIEW</a>
+    <a class="download-btn" href="https://drive.google.com/uc?export=download&id=1PRNPmuEgc6IvhUgI36dgwbqdAz_XrFGh">DOWNLOAD</a>
+</div>
+
+<div class="file-card">
+    <p>Resume Document 2</p>
+    <a class="view-btn" href="https://drive.google.com/file/d/16lH7Ok-PxuWyqrsKLqCqzIowLgGjPddd/preview" target="_blank">VIEW</a>
+    <a class="download-btn" href="https://drive.google.com/uc?export=download&id=16lH7Ok-PxuWyqrsKLqCqzIowLgGjPddd">DOWNLOAD</a>
+</div>
+
+<div class="file-card">
+    <p>Resume Document 3</p>
+    <a class="view-btn" href="https://drive.google.com/file/d/1yy1keW8VyQRw7AlZIr-g_lHQdEUBvPM-/preview" target="_blank">VIEW</a>
+    <a class="download-btn" href="https://drive.google.com/uc?export=download&id=1yy1keW8VyQRw7AlZIr-g_lHQdEUBvPM-">DOWNLOAD</a>
 </div>
 </section>
 
 <!-- Autobiography Section -->
 <section id="autobiography">
 <h3>Autobiography</h3>
-<div class="file-item">
-    <div class="file-card">
-        <p>Autobiography Document</p>
-        <a class="view-btn" href="https://docs.google.com/document/d/1RqusnwIL6fn0_tao7TEMvYBQMivxh5_M/preview" target="_blank">VIEW FILE</a>
-        <a class="download-btn" href="https://docs.google.com/document/d/1RqusnwIL6fn0_tao7TEMvYBQMivxh5_M/export?format=pdf">DOWNLOAD</a>
-    </div>
+<div class="file-card">
+    <p>Autobiography Document</p>
+    <a class="view-btn" href="https://docs.google.com/document/d/1RqusnwIL6fn0_tao7TEMvYBQMivxh5_M/preview" target="_blank">VIEW</a>
+    <a class="download-btn" href="https://docs.google.com/document/d/1RqusnwIL6fn0_tao7TEMvYBQMivxh5_M/export?format=pdf">DOWNLOAD</a>
 </div>
 </section>
 
 <!-- Invention / Innovation Section -->
 <section id="invention">
 <h3>Invention / Innovation (Videos)</h3>
-<div class="file-item">
+<div class="file-card">
+    <p>Innovation Video 1</p>
+    <a class="view-btn" href="https://drive.google.com/file/d/1kfgg4SkEc5hLF5PJlWIuaP497uZrE-66/preview" target="_blank">VIEW</a>
+    <a class="download-btn" href="https://drive.google.com/uc?export=download&id=1kfgg4SkEc5hLF5PJlWIuaP497uZrE-66">DOWNLOAD</a>
+</div>
 
-    <div class="file-card">
-        <p>Innovation Video 1</p>
-        <a class="view-btn" href="https://drive.google.com/file/d/1kfgg4SkEc5hLF5PJlWIuaP497uZrE-66/preview" target="_blank">VIEW FILE</a>
-        <a class="download-btn" href="https://drive.google.com/uc?export=download&id=1kfgg4SkEc5hLF5PJlWIuaP497uZrE-66">DOWNLOAD</a>
-    </div>
-
-    <div class="file-card">
-        <p>Innovation Video 2</p>
-        <a class="view-btn" href="https://drive.google.com/file/d/1QOvfknV8xBpedaF7MF2tEmy0-wrTFl7d/preview" target="_blank">VIEW FILE</a>
-        <a class="download-btn" href="https://drive.google.com/uc?export=download&id=1QOvfknV8xBpedaF7MF2tEmy0-wrTFl7d">DOWNLOAD</a>
-    </div>
-
+<div class="file-card">
+    <p>Innovation Video 2</p>
+    <a class="view-btn" href="https://drive.google.com/file/d/1QOvfknV8xBpedaF7MF2tEmy0-wrTFl7d/preview" target="_blank">VIEW</a>
+    <a class="download-btn" href="https://drive.google.com/uc?export=download&id=1QOvfknV8xBpedaF7MF2tEmy0-wrTFl7d">DOWNLOAD</a>
 </div>
 </section>
 
 <!-- African Culture Section -->
 <section id="culture">
 <h3>African Culture</h3>
-<div class="file-item">
-    <div class="file-card">
-        <p>African Culture Essay</p>
-        <a class="view-btn" href="https://docs.google.com/document/d/1IRqQCwq0hx7dsh-m2NzyGkghnnirTE0g/preview" target="_blank">VIEW FILE</a>
-        <a class="download-btn" href="https://docs.google.com/document/d/1IRqQCwq0hx7dsh-m2NzyGkghnnirTE0g/export?format=pdf">DOWNLOAD</a>
-    </div>
+<div class="file-card">
+    <p>African Culture Essay</p>
+    <a class="view-btn" href="https://docs.google.com/document/d/1IRqQCwq0hx7dsh-m2NzyGkghnnirTE0g/preview" target="_blank">VIEW</a>
+    <a class="download-btn" href="https://docs.google.com/document/d/1IRqQCwq0hx7dsh-m2NzyGkghnnirTE0g/export?format=pdf">DOWNLOAD</a>
 </div>
 </section>
 
 <!-- Society Challenges Section -->
 <section id="society">
 <h3>Society Challenges</h3>
-<div class="file-item">
-    <div class="file-card">
-        <p>Society Challenges Report</p>
-        <a class="view-btn" href="https://docs.google.com/document/d/132bSx-eIOeD9iBb5HiP0PU6AdQ4P5h5g/preview" target="_blank">VIEW FILE</a>
-        <a class="download-btn" href="https://docs.google.com/document/d/132bSx-eIOeD9iBb5HiP0PU6AdQ4P5h5g/export?format=pdf">DOWNLOAD</a>
-    </div>
+<div class="file-card">
+    <p>Society Challenges Report</p>
+    <a class="view-btn" href="https://docs.google.com/document/d/132bSx-eIOeD9iBb5HiP0PU6AdQ4P5h5g/preview" target="_blank">VIEW</a>
+    <a class="download-btn" href="https://docs.google.com/document/d/132bSx-eIOeD9iBb5HiP0PU6AdQ4P5h5g/export?format=pdf">DOWNLOAD</a>
 </div>
 </section>
 
 <!-- Others Section -->
 <section id="others">
 <h3>Others</h3>
-<div class="file-item">
-
-    <div class="file-card">
-        <p>Other Document 1</p>
-        <a class="view-btn" href="https://drive.google.com/file/d/1VguhlSp1pCDr8CHO67S9W3qPTftEiB2T/preview" target="_blank">VIEW FILE</a>
-        <a class="download-btn" href="https://drive.google.com/uc?export=download&id=1VguhlSp1pCDr8CHO67S9W3qPTftEiB2T">DOWNLOAD</a>
-    </div>
-
+<div class="file-card">
+    <p>Other Document 1</p>
+    <a class="view-btn" href="https://drive.google.com/file/d/1VguhlSp1pCDr8CHO67S9W3qPTftEiB2T/preview" target="_blank">VIEW</a>
+    <a class="download-btn" href="https://drive.google.com/uc?export=download&id=1VguhlSp1pCDr8CHO67S9W3qPTftEiB2T">DOWNLOAD</a>
 </div>
 </section>
 
 </div>
-
 </body>
 </html>
