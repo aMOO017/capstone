@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=2.0">
-<title>Capstone Portfolio - Amos Kipkoech C025-01-0851/2022</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Capstone Portfolio - Amos Kipkoech</title>
 
 <style>
 
@@ -19,32 +19,36 @@ body {
 header {
     background: #1a1a1a;
     color: white;
-    padding: 25px;
+    padding: 25px 15px;
     text-align: center;
     border-bottom: 7px solid #ffcc00;
 }
 
 header h1 {
     margin: 0;
-    font-size: 32px;
+    font-size: 30px;
 }
 
 header h2 {
     margin-top: 8px;
     font-weight: normal;
+    font-size: 18px;
 }
 
 /* --- NAVIGATION --- */
 nav {
     margin-top: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 nav a {
     color: #ffcc00;
-    margin: 0 12px;
+    margin: 6px 10px;
     text-decoration: none;
     font-weight: bold;
-    font-size: 15px;
+    font-size: 14px;
 }
 
 nav a:hover {
@@ -54,7 +58,8 @@ nav a:hover {
 
 /* --- MAIN CONTENT WRAPPER --- */
 .container {
-    width: 90%;
+    width: 95%;
+    max-width: 1100px;
     margin: auto;
     padding: 25px 0;
 }
@@ -82,23 +87,29 @@ section h3 {
     padding: 15px;
     margin-bottom: 15px;
     border-radius: 10px;
-    display: block;
     box-shadow: 0px 2px 6px rgba(0,0,0,0.08);
 }
 
 .file-card p {
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
+}
+
+/* --- BUTTON GROUP --- */
+.button-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
 }
 
 /* --- BUTTON STYLING --- */
 .view-btn, .download-btn {
     padding: 8px 14px;
-    margin-right: 8px;
     border-radius: 6px;
     text-decoration: none;
     font-size: 14px;
     font-weight: bold;
+    display: inline-block;
 }
 
 .view-btn {
@@ -117,6 +128,16 @@ section h3 {
 
 .download-btn:hover {
     background: #1e7e34;
+}
+
+/* --- MOBILE TWEAKS --- */
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 24px;
+    }
+    section h3 {
+        font-size: 20px;
+    }
 }
 
 </style>
@@ -225,5 +246,6 @@ section h3 {
 </div>
 </body>
 </html>
+
 
 
